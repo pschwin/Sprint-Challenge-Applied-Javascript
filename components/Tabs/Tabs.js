@@ -12,17 +12,24 @@ class TabLink {
     if(this.tabData == 'all'){
       // If `all` is true, select all cards regardless of their data attribute values
       this.cards = document.querySelectorAll('card');
-      console.log(this.cards);
+      //console.log(this.cards);
 
     } else {
       // else if `all` is false, only select the cards with matching this.tabData values
-      this.cards = document.querySelector(`[data-tab='${this.tabData}']`);
-      console.log(this.cards);
+      this.cards = document.querySelector(`.card[data-tab='${this.tabData}']`);
+      //console.log(this.cards);
     }
     
 
-     // Map over the newly converted NodeList we just created in our if statement above. Convert each this.cards element into a new instance of the TabCard class. Pass in a card object to the TabCard class. 
-    //this.cards = Array.from(this.cards).map();
+     // Map over the newly converted NodeList we just created in our if statement above. 
+     //Convert each this.cards element into a new instance of the TabCard class. Pass in a card object to the TabCard class. 
+     this.cards = Array.from(this.cards).map(card => {
+       
+      new TabCard(this.tabElement);
+
+     });
+
+     console.log(this.cards);
 
     // Add a click event that invokes this.selectTab
     this.tabElement.addEventListener('click', () => {
@@ -34,7 +41,7 @@ class TabLink {
 
     // Select all elements with the .tab class on them
     const tabs = document.querySelectorAll('.tab');
-    console.log(tabs);
+    //console.log(tabs);
     
     // Iterate through the NodeList removing the .active-tab class from each element
     tabs.forEach(tab => {
@@ -81,4 +88,3 @@ class TabCard {
 
 */
 let tabs = document.querySelectorAll('.tab').forEach(tab => new TabLink(tab));
-console.log(tabs);
